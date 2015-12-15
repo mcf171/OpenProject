@@ -1,10 +1,11 @@
 package cn.com.util;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import cn.com.model.People;
 import junit.framework.TestCase;
+import cn.com.model.People;
 
 public class TextUtilTest extends TestCase {
 
@@ -34,6 +35,12 @@ public class TextUtilTest extends TestCase {
 		for(People people :list)
 			if(people!= null)
 				peopleCount++;
+		System.out.println(peopleCount);
+		
+		List<People> exitstedPeople = new ArrayList<People>();
+		for(People people :list)
+			if(people!= null)
+				exitstedPeople.add(people);
 		System.out.println(peopleCount);
 	}
 
