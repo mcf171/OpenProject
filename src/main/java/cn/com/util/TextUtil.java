@@ -50,7 +50,6 @@ public class TextUtil {
 			BufferedReader br=new BufferedReader(fr);
 	        String line="";
 	        String[] arrs=null;
-	        int lineNumber = 0;
 			int labelCount = 0;
 			while ((line=br.readLine())!=null) {
 				

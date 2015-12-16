@@ -85,8 +85,8 @@ public class GroupMining {
      */  
     public double distance(People p1, People p2) {  
         double distance = 0.0;  
-        List<People> friendsOfP1 = p1.getFriends();
-        List<People> friendsOfP2 = p2.getFriends();
+        List<Integer> friendsOfP1 = p1.getFriends();
+        List<Integer> friendsOfP2 = p2.getFriends();
         double numOfSameFriend = 0;
         for(int i=0; i<friendsOfP1.size(); i++) {
         	if(friendsOfP2.contains(friendsOfP1.get(i))) {
