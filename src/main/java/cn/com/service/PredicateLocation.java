@@ -12,7 +12,7 @@ public class PredicateLocation {
 
 	public double predictLocation(People p, List<Integer> trainData, People[] peopleArray) {
 		double nextLocation = -1;
-		List<Double> locationNames = new ArrayList<Double>();
+		List<Double> locationNames = new ArrayList<Double>();  //存储训练集中出现过的所有Location
 		for(int i=0; i<trainData.size(); i++) {
 			List<Location> location = peopleArray[trainData.get(i)].getLists();
 			for(int j=0; j<location.size(); j++) {
@@ -22,16 +22,24 @@ public class PredicateLocation {
 			}
 		}
 		PreLocationName.preLocationName(p, locationNames);
-		List<Location> locationList = p.getProcessedLocation();
-		TreeNode nowNode = buildTree(peopleArray,trainData,locationNames);
+		List<Location> locationList = p.getProcessedLocation();  //存储用户p中所有经过处理的Location
+		TreeNode root = buildTree(peopleArray,trainData,locationNames);
+		TreeNode nowNode = new TreeNode();
 		for(int i=0; i<locationList.size(); i++) {
 			int index = -1;
+			double name = locationList.get(i).getLocation();
 			if(i == 0) {
-				//index = root.getChildNode(locationList.get(0).getLocation());
-				//nowNode = root.getChild().get(index);
+				index = root.getChildNode(name);
+				nowNode = root.getChild().get(index);
 			}else{
-				index = nowNode.getChildNode(locationList.get(i).getLocation());
+				index = nowNode.getChildNode(name);
 				if(index != -1) {					
+					nowNode = nowNode.getChild().get(index);
+				}else{
+					while(index == -1) {						
+						nowNode = nowNode.getParentNode();
+						index = nowNode.getChildNode(name);
+					}
 					nowNode = nowNode.getChild().get(index);
 				}
 			}
