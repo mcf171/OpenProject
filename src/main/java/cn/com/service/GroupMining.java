@@ -126,7 +126,7 @@ public class GroupMining {
             }  
             int minLocation = minDistance(distances);
             String oldLabel = peopleArray[dataSet.get(i)].getLabel();
-            if(!oldLabel.equals(String.valueOf(minLocation))) {
+            if(oldLabel == null || !oldLabel.equals(String.valueOf(minLocation))) {
             	endFlag = false;
             }
             peopleArray[dataSet.get(i)].setLabel(String.valueOf(minLocation));
@@ -139,7 +139,7 @@ public class GroupMining {
      */  
     public double SumSimilarity(People p, int t, List<List<Integer>> cluster) {  
         double sum = 0;  
-        for (int i = 0; i < cluster.size(); i++) { 
+        for (int i = 0; i < cluster.get(t).size(); i++) { 
         	People temP = peopleArray[dataSet.get(cluster.get(t).get(i))];
         	if(!(temP.equals(p))) {
         		sum += distance(temP, p);
