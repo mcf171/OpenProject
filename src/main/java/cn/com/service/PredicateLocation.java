@@ -25,7 +25,7 @@ public class PredicateLocation {
 		List<Location> locationList = p.getProcessedLocation();  //存储用户p中所有经过处理的Location
 		TreeNode root = buildTree(peopleArray,trainData,locationNames);
 		TreeNode nowNode = new TreeNode();
-		for(int i=0; i<locationList.size(); i++) {
+		for(int i=0; i<locationList.size()-1; i++) {
 			int index = -1;
 			double name = locationList.get(i).getLocation();
 			if(i == 0) {
@@ -89,6 +89,5 @@ public class PredicateLocation {
 			nextNode = node;
 		}
 		return nextNode;
-	}
-	
+	}	
 }

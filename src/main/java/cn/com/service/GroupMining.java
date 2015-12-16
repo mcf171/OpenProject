@@ -17,6 +17,7 @@ public class GroupMining {
 	private List<List<Integer>> cluster; //簇
 	private Random random;
 	private boolean endFlag;
+	private int m = 1; //迭代次数
 	
 	public void init(int k, People[] peopleArray, List<Integer> dataSet) {
 		if(k<=0) {
@@ -179,12 +180,15 @@ public class GroupMining {
     public List<List<Integer>> kmeans(int k, People[] peopleArray, List<Integer> dataSet) {  
         init(k, peopleArray,dataSet);  
         // 循环分组，直到每个元素的类标不变为止  
-        while(!endFlag) {
+        while(!endFlag || m<=10) {
+        	System.out.println("第" + m + "次迭代");
         	endFlag = true;
         	setNewCenter();   
         	cluster.clear();  
             cluster = initCluster();
-            clusterSet();        
+            clusterSet(); 
+            m++;
+        
         }
         return cluster;
     } 
