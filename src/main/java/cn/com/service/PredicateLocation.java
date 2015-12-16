@@ -1,4 +1,4 @@
-package cn.com.service;
+/*package cn.com.service;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public class PredicateLocation {
 
 	public double predictLocation(People p, List<Integer> trainData, People[] peopleArray) {
 		double nextLocation = -1;
-		List<Double> locationName = new
+//		List<Double> locationName = new
 		TreeNode nowNode = buildTree(peopleArray,trainData,locationName);
 		List<Location> locationList = p.getLists();
 		for(int i=0; i<locationList.size(); i++) {
@@ -73,3 +73,4 @@ public class PredicateLocation {
 	}
 	
 }
+*/
