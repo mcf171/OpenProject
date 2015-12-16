@@ -10,7 +10,8 @@ public class PredicateLocation {
 
 	public double predictLocation(People p, List<Integer> trainData, People[] peopleArray) {
 		double nextLocation = -1;
-		TreeNode nowNode = root;
+		List<Double> locationName = new
+		TreeNode nowNode = buildTree(peopleArray,trainData,locationName);
 		List<Location> locationList = p.getLists();
 		for(int i=0; i<locationList.size(); i++) {
 			int index = -1;
@@ -34,15 +35,16 @@ public class PredicateLocation {
 		return nextLocation;
 	}
 	
-	public TreeNode buildTree(List<People> datas, List<Double> locationName) {
+	public TreeNode buildTree(People[] peopleArray,List<Integer> datas, List<Double> locationName) {
 		TreeNode root = new TreeNode();
+		root.setName(-1);
 		for(int i=0; i<locationName.size(); i++) {
 			TreeNode node = new TreeNode();
 			node.setName(locationName.get(i));
 			root.getChild().add(node);
 		}
 		for(int i=0; i<datas.size(); i++) {
-			People p = datas.get(i);
+			People p = peopleArray[datas.get(i)];
 			List<Location> locationList = p.getLists();
 			TreeNode nowNode = new TreeNode();
 			nowNode = root;

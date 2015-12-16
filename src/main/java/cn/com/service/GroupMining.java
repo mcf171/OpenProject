@@ -62,7 +62,7 @@ public class GroupMining {
 			randoms[i] = temp;
 		}
 		for(int i=0; i<k; i++) {
-			center.add(dataSet.get(randoms[i]));
+			center.add(peopleArray[dataSet.get(randoms[i])]);
 		}
 		return center;
 	}
@@ -122,14 +122,14 @@ public class GroupMining {
         double[] distances = new double[k];  
         for (int i = 0; i < dataSetLength; i++) {  
             for (int j = 0; j < k; j++) {  
-                distances[j] = distance(dataSet.get(i), center.get(j));  
+                distances[j] = distance(peopleArray[dataSet.get(i)], center.get(j));  
             }  
             int minLocation = minDistance(distances);
-            String oldLabel = dataSet.get(i).getLabel();
+            String oldLabel = peopleArray[dataSet.get(i)].getLabel();
             if(!oldLabel.equals(String.valueOf(minLocation))) {
             	endFlag = false;
             }
-            dataSet.get(i).setLabel(String.valueOf(minLocation));
+            peopleArray[dataSet.get(i)].setLabel(String.valueOf(minLocation));
             cluster.get(minLocation).add(i);
         }  
     } 
@@ -140,7 +140,7 @@ public class GroupMining {
     public double SumSimilarity(People p, int t, List<List<Integer>> cluster) {  
         double sum = 0;  
         for (int i = 0; i < cluster.size(); i++) { 
-        	People temP = dataSet.get(cluster.get(t).get(i));
+        	People temP = peopleArray[dataSet.get(cluster.get(t).get(i))];
         	if(!(temP.equals(p))) {
         		sum += distance(temP, p);
         	}
@@ -158,7 +158,7 @@ public class GroupMining {
             	People centerPeople = center.get(i);
             	double minSum = SumSimilarity(centerPeople, i, cluster);
                 for(int j=0; j<n; j++) {
-                	People temp = dataSet.get(cluster.get(i).get(j));
+                	People temp = peopleArray[dataSet.get(cluster.get(i).get(j))];
                 	if(!(temp.equals(centerPeople))){
                 		double tempSum = SumSimilarity(temp, i, cluster);
                 		if(tempSum < minSum) {
@@ -173,7 +173,7 @@ public class GroupMining {
     }
     
     public List<List<Integer>> kmeans(int k, People[] peopleArray, List<Integer> dataSet) {  
-        init(int k, People[] peopleArray, List<Integer> dataSet);  
+        init(k, peopleArray,dataSet);  
         // 循环分组，直到每个元素的类标不变为止  
         while(!endFlag) {
         	endFlag = true;
