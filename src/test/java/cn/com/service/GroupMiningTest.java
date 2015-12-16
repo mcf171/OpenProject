@@ -29,7 +29,7 @@ public class GroupMiningTest extends TestCase {
 		numbers = TextUtil.getNumber(fileName);
 		
 		//通过有效的用户和地名筛选people
-		peopleArray = TextUtil.getLimitedPeople(numbers, fileName, 1, 1);
+		peopleArray = TextUtil.getLimitedPeople(numbers, fileName, 4, 40);
 		
 		//获取拥有好友关系和group truth的people
 		people = TextUtil.getFriends("data/Gowalla_edges.txt", peopleArray);

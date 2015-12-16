@@ -270,10 +270,11 @@ public class TextUtil {
 	        String[] arrs=null;
 
 	        while ((line=br.readLine())!=null) {
-	        
+	        	
+	        	lineNumber  ++;
+	 
 	        	line = line.trim();
 	            arrs=line.split("\t");
-	            lineNumber++;
 	            if(locationAllowed[Integer.parseInt(arrs[4])]==1  && peopleAllowed[Integer.parseInt(arrs[0])] == 1){
 	            	
 	            	People people = peopleArray[Integer.parseInt(arrs[0])];

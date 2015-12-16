@@ -137,12 +137,15 @@ public class GroupMining {
     /** 
      * 计算非相似度平方和
      */  
-    public double SumSimilarity(People p, int t, List<List<Integer>> cluster) {  
+    public double SumSimilarity(People p, int t, List<List<Integer>> cluster,double currrentMinSum) {  
         double sum = 0;  
         for (int i = 0; i < cluster.get(t).size(); i++) { 
         	People temP = peopleArray[dataSet.get(cluster.get(t).get(i))];
         	if(!(temP.equals(p))) {
         		sum += distance(temP, p);
+        		if(sum > currrentMinSum) {
+        			break;
+        		}
         	}
         }  
         return sum;  
@@ -154,13 +157,14 @@ public class GroupMining {
     public void setNewCenter() { 
         for (int i = 0; i < k; i++) {  
             int n = cluster.get(i).size();  
+            double currrentMinSum = Double.MAX_VALUE;
             if (n != 0) {  
             	People centerPeople = center.get(i);
-            	double minSum = SumSimilarity(centerPeople, i, cluster);
+            	double minSum = SumSimilarity(centerPeople, i, cluster,currrentMinSum);
                 for(int j=0; j<n; j++) {
                 	People temp = peopleArray[dataSet.get(cluster.get(i).get(j))];
                 	if(!(temp.equals(centerPeople))){
-                		double tempSum = SumSimilarity(temp, i, cluster);
+                		double tempSum = SumSimilarity(temp, i, cluster,minSum);
                 		if(tempSum < minSum) {
                 			minSum = tempSum;
                 			centerPeople = temp;
@@ -180,7 +184,7 @@ public class GroupMining {
         	setNewCenter();   
         	cluster.clear();  
             cluster = initCluster();
-            clusterSet();                   
+            clusterSet();        
         }
         return cluster;
     } 
