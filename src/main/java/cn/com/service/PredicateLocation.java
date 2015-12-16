@@ -1,4 +1,4 @@
-/*package cn.com.service;
+package cn.com.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,15 +6,24 @@ import java.util.List;
 import cn.com.model.Location;
 import cn.com.model.People;
 import cn.com.model.TreeNode;
+import cn.com.util.PreLocationName;
 
 public class PredicateLocation {
 
 	public double predictLocation(People p, List<Integer> trainData, People[] peopleArray) {
 		double nextLocation = -1;
-		List<Double> locationName = new ArrayList<Double>();
-
-		TreeNode nowNode = buildTree(peopleArray,trainData,locationName);
-		List<Location> locationList = p.getLists();
+		List<Double> locationNames = new ArrayList<Double>();
+		for(int i=0; i<trainData.size(); i++) {
+			List<Location> location = peopleArray[trainData.get(i)].getLists();
+			for(int j=0; j<location.size(); j++) {
+				if(!(locationNames.contains(location.get(j).getLocation()))) {
+					locationNames.add(location.get(j).getLocation());
+				}
+			}
+		}
+		PreLocationName.preLocationName(p, locationNames);
+		List<Location> locationList = p.getProcessedLocation();
+		TreeNode nowNode = buildTree(peopleArray,trainData,locationNames);
 		for(int i=0; i<locationList.size(); i++) {
 			int index = -1;
 			if(i == 0) {
@@ -75,4 +84,3 @@ public class PredicateLocation {
 	}
 	
 }
-*/
