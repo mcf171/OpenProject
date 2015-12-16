@@ -11,8 +11,19 @@ public class People {
 	
 	private List<Integer> recommend = new ArrayList<Integer>();
 	private List<Integer> friends = new ArrayList<Integer>();
-	private List<Location> lists = new ArrayList<Location>();
+	private List<Location> locationLists = new ArrayList<Location>();
+	private List<Location> processedLocation = new ArrayList<Location>();
 	
+	
+	
+	public List<Location> getProcessedLocation() {
+		return processedLocation;
+	}
+
+	public void setProcessedLocation(List<Location> processedLocation) {
+		this.processedLocation = processedLocation;
+	}
+
 	public List<Integer> getFriends() {
 		return friends;
 	}
@@ -30,11 +41,11 @@ public class People {
 	}
 
 	public List<Location> getLists() {
-		return lists;
+		return locationLists;
 	}
 
 	public void setLists(List<Location> lists) {
-		this.lists = lists;
+		this.locationLists = lists;
 	}
 
 	public String getLabel() {
@@ -77,7 +88,7 @@ public class People {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		String description = "user id :" + userId + ", friends size is :" + friends.size() + ",location size is :" + lists.size();
+		String description = "user id :" + userId + ", friends size is :" + friends.size() + ",location size is :" + locationLists.size();
 		return description;
 	}
 	
