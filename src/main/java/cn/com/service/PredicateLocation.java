@@ -12,6 +12,7 @@ public class PredicateLocation {
 	public double predictLocation(People p, List<Integer> trainData, People[] peopleArray) {
 		double nextLocation = -1;
 		List<Double> locationName = new ArrayList<Double>();
+
 		TreeNode nowNode = buildTree(peopleArray,trainData,locationName);
 		List<Location> locationList = p.getLists();
 		for(int i=0; i<locationList.size(); i++) {
