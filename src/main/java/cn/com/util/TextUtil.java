@@ -2,7 +2,11 @@ package cn.com.util;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -283,13 +287,26 @@ public class TextUtil {
 		            }
 		            
 		            Location location = new Location();
+		            
 		            location.setTime(arrs[1]);
 		            location.setLatitude(Double.parseDouble(arrs[2]));
 		            location.setLongitude(Double.parseDouble(arrs[3]));
 		            location.setLocation(Double.parseDouble(arrs[4]));
+		    		String[] timeSplits = arrs[1].split("T");
+		    		String day = timeSplits[0];
+		    		String time = timeSplits[1].split("Z")[0];
+		    		String constructString = day + " " + time;
+		    		DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		    		try {
+		    			Date date = dateFormat2.parse(constructString);
+		    			location.setRealTime(date);
+		    		} catch (ParseException e) {
+		    			// TODO Auto-generated catch block
+		    			e.printStackTrace();
+		    		}
+		    		
 		            
-		            
-		            people.getLists().add(location);
+		            people.getLists().add(0,location);
 	            }
 	            	
 	            

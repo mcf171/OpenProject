@@ -1,12 +1,23 @@
 package cn.com.model;
 
+import java.util.Date;
+
 public class Location {
 
 	private String time;
 	private double latitude;
 	private double longitude;
 	private double location;
+	private Date realTime;
 	
+	
+	
+	public Date getRealTime() {
+		return realTime;
+	}
+	public void setRealTime(Date realTime) {
+		this.realTime = realTime;
+	}
 	public String getTime() {
 		return time;
 	}

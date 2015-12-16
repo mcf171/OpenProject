@@ -1,5 +1,9 @@
 package cn.com.service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +19,6 @@ public class RecommendLocationTest extends TestCase {
 		List<Map<Double,Integer>> numbers;
 		List<Integer> people;
 		String fileName;
-		
 		
 
 		fileName = "data/testFriends.txt";
