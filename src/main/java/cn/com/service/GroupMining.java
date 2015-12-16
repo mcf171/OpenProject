@@ -180,9 +180,12 @@ public class GroupMining {
     public List<List<Integer>> kmeans(int k, People[] peopleArray, List<Integer> dataSet) {  
         init(k, peopleArray,dataSet);  
         // 循环分组，直到每个元素的类标不变为止  
+
         while(!endFlag || m<=10) {
         	System.out.println("第" + m + "次迭代");
+
         	endFlag = true;
+        	
         	setNewCenter();   
         	cluster.clear();  
             cluster = initCluster();
