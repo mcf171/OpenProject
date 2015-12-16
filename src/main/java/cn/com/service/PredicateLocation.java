@@ -1,4 +1,4 @@
-package cn.com.service;
+/*package cn.com.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,3 +75,4 @@ public class PredicateLocation {
 	}
 	
 }
+*/
