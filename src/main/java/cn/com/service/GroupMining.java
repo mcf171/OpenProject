@@ -11,21 +11,20 @@ public class GroupMining {
 
 	private int k; //簇的数量
 	private int dataSetLength; //数据元素个数，即数据集的长度
-	private List<People> dataSet; //数据集
+	private List<Integer> dataSet; //数据集
+	private People[] peopleArray;
 	private List<People> center; //簇中心集合
 	private List<List<Integer>> cluster; //簇
 	private Random random;
 	private boolean endFlag;
 	
-	public GroupMining(int k, List<People> dataSet) {
+	public void init(int k, People[] peopleArray, List<Integer> dataSet) {
 		if(k<=0) {
 			k=1;
 		}
 		this.k = k;
 		this.dataSet = dataSet;
-	}
-	
-	public void init() {
+		this.peopleArray = peopleArray;
 		random = new Random();
 		dataSetLength = dataSet.size();
 		if(k>dataSetLength) {
@@ -33,7 +32,6 @@ public class GroupMining {
 		}
 		center = initCenter();
 		cluster = initCluster();
-//		jc = new ArrayList<Double>();
 		endFlag = false;
 	}
 	
@@ -174,8 +172,8 @@ public class GroupMining {
         }
     }
     
-    public List<List<Integer>> kmeans() {  
-        init();  
+    public List<List<Integer>> kmeans(int k, People[] peopleArray, List<Integer> dataSet) {  
+        init(int k, People[] peopleArray, List<Integer> dataSet);  
         // 循环分组，直到每个元素的类标不变为止  
         while(!endFlag) {
         	endFlag = true;

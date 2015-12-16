@@ -8,7 +8,7 @@ import cn.com.model.TreeNode;
 
 public class PredicateLocation {
 
-	public double predictLocation(People p, TreeNode root) {
+	public double predictLocation(People p, List<Integer> trainData, People[] peopleArray) {
 		double nextLocation = -1;
 		TreeNode nowNode = root;
 		List<Location> locationList = p.getLists();

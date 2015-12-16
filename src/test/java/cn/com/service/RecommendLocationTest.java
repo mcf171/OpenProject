@@ -36,7 +36,7 @@ public class RecommendLocationTest extends TestCase {
 		}
 		
 		
-		fileName = "data/Gowalla_totalCheckins.txt";
+		/*fileName = "data/Gowalla_totalCheckins.txt";
 		
 		//获取有效的用户和地名
 		numbers = TextUtil.getNumber(fileName);
@@ -51,7 +51,7 @@ public class RecommendLocationTest extends TestCase {
 			
 			RecommendLocation.recommendLocation(peopleIndex, peopleArray);
 			
-		}
+		}*/
 		System.out.println("success");
 	}
 
