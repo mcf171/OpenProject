@@ -9,6 +9,46 @@ import cn.com.model.People;
 
 public class TextUtilTest extends TestCase {
 
+	public void testMarkFriends(){
+		
+		People[] peopleArray;
+		List<Map<Double,Integer>> numbers;
+		List<Integer> people;
+		String fileName = "data/testFriends.txt";
+		numbers = TextUtil.getNumber(fileName);
+		
+		peopleArray = TextUtil.getLimitedPeople(numbers, fileName, 1, 1);
+		
+		people = TextUtil.getFriends("data/testEdges.txt", peopleArray);
+		this.assertEquals(people.size(), 3);
+		//people = TextUtil.markFriends(people,peopleArray);
+		System.out.println("success");
+		
+
+		fileName = "data/Gowalla_totalCheckins.txt";
+		numbers = TextUtil.getNumber(fileName);
+		
+		peopleArray = TextUtil.getLimitedPeople(numbers, fileName, 5, 40);
+		
+		people = TextUtil.getFriends("data/Gowalla_edges.txt", peopleArray);
+		
+		//people = TextUtil.markFriends(people,peopleArray);
+		System.out.println("success");
+	}
+	
+	public void testGetFriends(){
+
+		People[] peopleArray;
+		List<Map<Double,Integer>> numbers;
+		String fileName = "data/Gowalla_totalCheckins.txt";
+		numbers = TextUtil.getNumber(fileName);
+		
+		peopleArray = TextUtil.getLimitedPeople(numbers, fileName, 5, 40);
+		List<Integer> people = TextUtil.getFriends("data/Gowalla_edges.txt", peopleArray);
+		
+		System.out.println(people.size());
+	}
+	
 	public void testGetLocation() {
 		
 		List<People> peopleList = TextUtil.getLocation("data/Gowalla_totalCheckins.txt");

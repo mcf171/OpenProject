@@ -16,6 +16,97 @@ public class TextUtil {
 	public static double minX = Double.MAX_VALUE, maxX = 0, avgX = 0, minY = Double.MAX_VALUE, maxY = 0,avgY = 0;
 	public static double maxDistance = 0, minDistance = Double.MAX_VALUE,avgDistance = 0;
 	
+	public static List<Integer> markFriends(List<Integer> peopleList,People[] peopleArray){
+		
+		int labelCount = 0;
+		
+		for(int peopleIndex :peopleList){
+			
+			if(peopleArray[peopleIndex].getTrueLabel().equals("unknown")){
+				setLabel(peopleIndex, labelCount + "",peopleArray);
+				labelCount ++;
+			}
+		}
+		
+		
+		return peopleList;
+	}
+	
+	public static void setLabel(int peopleIndex, String label,People[] peopleArray){
+		
+		if(peopleArray[peopleIndex].getTrueLabel().equals("unknown")){
+			peopleArray[peopleIndex].setTrueLabel(label);
+			for(int friendIndex : peopleArray[peopleIndex].getFriends())
+				setLabel(friendIndex, label,peopleArray);
+		}
+	}
+	
+	public static List<Integer> getFriends(String fileName, People[] peopleArray){
+		
+		List<Integer> peopleList = new ArrayList<Integer>();
+		FileReader fr;
+		try {
+			fr = new FileReader(fileName);
+			BufferedReader br=new BufferedReader(fr);
+	        String line="";
+	        String[] arrs=null;
+	        int lineNumber = 0;
+			int labelCount = 0;
+			while ((line=br.readLine())!=null) {
+				
+				arrs = line.split("\t");
+				
+				int peopleIndex = Integer.parseInt(arrs[0]);
+				int friendIndex = Integer.parseInt(arrs[1]);
+				
+				if(peopleArray[peopleIndex] != null && peopleArray[friendIndex] != null){
+					
+					if(!peopleArray[peopleIndex].getFriends().contains(peopleArray[friendIndex])){
+						String trueLabel = "";
+						if(peopleArray[peopleIndex].getTrueLabel().equals("unknown") &&peopleArray[friendIndex].getTrueLabel().equals("unknown")){
+							
+							trueLabel = "" + labelCount;
+							labelCount++;
+						}else{
+							
+							if(!peopleArray[peopleIndex].getTrueLabel().equals("unknown"))
+								trueLabel = peopleArray[peopleIndex].getTrueLabel();
+							if(!peopleArray[friendIndex].getTrueLabel().equals("unknown"))
+								trueLabel = peopleArray[friendIndex].getTrueLabel();
+							
+						}
+						
+						peopleArray[friendIndex].setTrueLabel(trueLabel);
+						peopleArray[peopleIndex].setTrueLabel(trueLabel);
+						
+						peopleArray[peopleIndex].getFriends().add(friendIndex);
+						if(!peopleArray[friendIndex].getFriends().contains(peopleArray[peopleIndex]))
+							peopleArray[friendIndex].getFriends().add(peopleIndex);
+					}
+					
+				}
+				
+			}
+			for(int i = 0; i < peopleArray.length ; i ++)
+				if(peopleArray[i]!=null){
+					if(peopleArray[i].getTrueLabel().equals("unknown")){
+						peopleArray[i].setTrueLabel("" + labelCount);
+						labelCount++;
+					}
+					peopleList.add(i);
+				}
+			
+	        br.close();
+	        fr.close();
+	        
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return peopleList;
+	}
+	
 	public static List<People> getLocation(String fileName){
 		
 		List<People> lists = new ArrayList<People>();
@@ -189,6 +280,7 @@ public class TextUtil {
 		            	peopleArray[Integer.parseInt(arrs[0])] = new People();
 		            	people = peopleArray[Integer.parseInt(arrs[0])];
 		            	people.setUserId(Integer.parseInt(arrs[0]));
+		            	people.setTrueLabel("unknown");
 		            }
 		            
 		            Location location = new Location();
@@ -197,8 +289,7 @@ public class TextUtil {
 		            location.setLongitude(Double.parseDouble(arrs[3]));
 		            location.setLocation(Double.parseDouble(arrs[4]));
 		            
-		            if(lineNumber%1000 == 0)
-		            	System.out.println("lineNumber :" + lineNumber);
+		            
 		            people.getLists().add(location);
 	            }
 	            	

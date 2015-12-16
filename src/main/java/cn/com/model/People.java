@@ -9,15 +9,15 @@ public class People {
 	private String label;
 	private String trueLabel;
 	
-	private List<People> recommend = new ArrayList<People>();
-	private List<People> friends = new ArrayList<People>();
+	private List<Integer> recommend = new ArrayList<Integer>();
+	private List<Integer> friends = new ArrayList<Integer>();
 	private List<Location> lists = new ArrayList<Location>();
 	
-	public List<People> getFriends() {
+	public List<Integer> getFriends() {
 		return friends;
 	}
 
-	public void setFriends(List<People> friends) {
+	public void setFriends(List<Integer> friends) {
 		this.friends = friends;
 	}
 
@@ -53,11 +53,11 @@ public class People {
 		this.trueLabel = trueLabel;
 	}
 
-	public List<People> getRecommend() {
+	public List<Integer> getRecommend() {
 		return recommend;
 	}
 
-	public void setRecommend(List<People> recommend) {
+	public void setRecommend(List<Integer> recommend) {
 		this.recommend = recommend;
 	}
 
@@ -72,6 +72,13 @@ public class People {
 		}
 			
 		return flag;
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		String description = "user id :" + userId + ", friends size is :" + friends.size() + ",location size is :" + lists.size();
+		return description;
 	}
 	
 	
